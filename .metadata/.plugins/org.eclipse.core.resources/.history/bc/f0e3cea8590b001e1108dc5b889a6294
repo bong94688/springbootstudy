@@ -1,0 +1,25 @@
+package com.example.TT.item.service;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.UUID;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class FileService {
+
+	public String uploadFile(String uploadPath, String oriFileName,byte[] fileData) throws IOException{
+		
+		UUID uuid = UUID.randomUUID();
+		String extension = oriFileName.substring(oriFileName.lastIndexOf("."));
+		String savedFileName = uuid.toString() + extension;
+		String fileUploadUrl = uploadPath + "/" + savedFileName;
+		FileOutputStream fos = new FileOutputStream(fileUploadUrl);
+		
+		fos.write(fileData);
+		fos.close();
+		return savedFileName;
+		
+	}
+}

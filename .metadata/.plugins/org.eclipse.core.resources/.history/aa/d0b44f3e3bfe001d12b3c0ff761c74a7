@@ -1,0 +1,32 @@
+package com.example.TT.cart.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.example.TT.member.entity.Member;
+import com.example.TT.item.entity.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Entity
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+public class Cartitem {
+	
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "cart_item_id")
+	private Long id;
+	
+	private Cart cart;
+	
+	private com.example.TT.item.entity.item item;
+}

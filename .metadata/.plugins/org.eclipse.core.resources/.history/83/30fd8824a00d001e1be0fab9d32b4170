@@ -1,0 +1,67 @@
+package com.example.TT.item.repository;
+
+import static com.example.TT.item.entity.Qitem.item;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import com.example.TT.item.constant.itemSellStatus;
+import com.example.TT.item.dto.ItemSearchDto;
+import com.example.TT.item.entity.Qitem;
+import com.example.TT.item.entity.item;
+import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.Wildcard;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+
+public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
+
+	private JPAQueryFactory queryFactory;
+	
+	public ItemRepositoryCustomImpl(EntityManager em) {
+		queryFactory = new JPAQueryFactory(em);
+	}
+	
+	
+	@Override
+	public Page<item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
+		List<item> list = queryFactory
+			.selectFrom(item)
+			.where()
+			.orderBy(item.id.desc())
+			.offset(pageable.getOffset())
+			.limit(pageable.getPageSize())
+			.fetch();
+		
+		 long total = queryFactory.select(Wildcard.count).from(item)
+	                .where(regDtsAfter(itemSearchDto.getSearchDateType()),
+	                        searchSellStatusEq(itemSearchDto.getSearchSellStatus()),
+	                        searchByLike(itemSearchDto.getSearchBy(), itemSearchDto.getSearchQuery()))
+	                .fetchOne()
+	                ;
+		
+		return null;
+	}
+
+
+	private Predicate regDtsAfter(String searchDateType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	private Predicate searchSellStatusEq(itemSellStatus searchSellStatus) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	private Predicate searchByLike(String searchBy, String searchQuery) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

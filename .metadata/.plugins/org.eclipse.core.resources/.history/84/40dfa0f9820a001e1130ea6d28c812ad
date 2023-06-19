@@ -1,0 +1,9 @@
+package com.example.TT.order.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.TT.order.entity.Orderitem;
+
+public interface OrderItemRepository extends JpaRepository<Orderitem,Long>{
+
+}

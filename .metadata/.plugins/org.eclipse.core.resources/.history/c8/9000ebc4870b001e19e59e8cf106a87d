@@ -1,0 +1,23 @@
+package com.example.TT.item.service;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.example.TT.item.entity.ItemImg;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+@Transactional
+public class ItemImgService {
+
+	
+	private final ItemImg img;
+	
+	private final FileService fileService;
+	
+	public void saveItemImg(ItemImg itemImg) {
+	
+	}
+}

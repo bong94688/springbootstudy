@@ -1,0 +1,5 @@
+package com.example.TT.item.entity;
+
+public class ItemImg {
+
+}

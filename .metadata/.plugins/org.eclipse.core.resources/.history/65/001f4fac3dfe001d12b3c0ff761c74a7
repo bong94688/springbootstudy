@@ -1,0 +1,43 @@
+package com.example.TT.order.entity;
+
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.example.TT.member.entity.Member;
+import com.example.TT.order.constant.OrderStatus;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Entity
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+//order 프로그램에서 쓰고있어서 바꾼다.
+@Table(name = "orders")
+@AllArgsConstructor
+public class Order {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "order_id")
+	private Long id;
+	
+	
+	private Member member;
+	
+	private LocalDateTime orderDate;
+	
+	private OrderStatus orderStatus;
+	
+}

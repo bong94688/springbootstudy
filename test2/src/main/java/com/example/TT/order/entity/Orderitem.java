@@ -1,0 +1,57 @@
+package com.example.TT.order.entity;
+
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.ManyToAny;
+
+import com.example.TT.item.entity.item;
+import com.example.TT.member.entity.Member;
+import com.example.TT.order.constant.OrderStatus;
+import com.example.TT.utils.entity.BaseEntity;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Entity
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+//order 프로그램에서 쓰고있어서 바꾼다.
+@AllArgsConstructor
+public class Orderitem extends BaseEntity{
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "order_item_id")
+	private Long id;
+
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "order_id")
+	private Order order;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "item_id")
+	private item item;
+
+	private int orderPrice;
+
+	private int count;
+
+
+
+}

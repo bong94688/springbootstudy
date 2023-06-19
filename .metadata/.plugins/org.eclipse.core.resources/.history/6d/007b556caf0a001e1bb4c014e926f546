@@ -1,0 +1,28 @@
+package com.example.TT.item.entity;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import com.example.TT.item.constant.itemSellStatus;
+import com.example.TT.utils.entity.BaseEntity;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+
+@javax.persistence.Entity
+@javax.persistence.Table(name = "my_item_Img")
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+public class ItemImg extends BaseEntity{
+
+	@Id
+	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+	@Column(name = "ItemImg_id")
+	private Long id;   //상품 코드
+}

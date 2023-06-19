@@ -1,0 +1,67 @@
+package com.example.TT.order.entity;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.example.TT.member.entity.Member;
+import com.example.TT.order.constant.OrderStatus;
+import com.example.TT.utils.entity.BaseEntity;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Entity
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+//order 프로그램에서 쓰고있어서 바꾼다.
+@Table(name = "orders")
+@AllArgsConstructor
+public class Order extends BaseEntity{
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "order_id")
+	private Long id;
+	
+
+//	주문이 many member one
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "member_id")
+	private Member member;
+	
+	
+//	Order 엔티티가 주인이 아니므로 mappedBy 속성으로 연관관계의 주인을 설정
+//	속성의 값으로 "order"를 적어준 이유는 OrderItem에 있는 Order에 의해 관리된다는 의미로 해석
+//	양방향 매핑 완성
+	@OneToMany(mappedBy = "order",cascade = CascadeType.ALL,orphanRemoval = true
+			,fetch = FetchType.LAZY)
+	private List<Orderitem> orderitems = new ArrayList<Orderitem>();
+	
+	private LocalDateTime orderDate;
+	
+//	@Enumerated(EnumType.STRING)
+	private OrderStatus orderStatus;
+	
+	
+	
+}

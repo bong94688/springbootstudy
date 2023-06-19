@@ -1,0 +1,5 @@
+package com.example.TT.item.dto;
+
+public class ItemImgDto {
+
+}
